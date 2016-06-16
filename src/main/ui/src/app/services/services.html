@@ -1,0 +1,25 @@
+<div class="container-fluid">
+<air-header></air-header>
+  <div class="row">
+		<div class="col-md-6">
+      <div class="col-sm-12 col-md-6 col-xs-12" ng-repeat="awesomeThing in vm.awesomeThings | orderBy:'rank'">
+        <div class="thumbnail">
+          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
+          <div class="caption">
+            <h3>{{ awesomeThing.title }}</h3>
+            <p>{{ awesomeThing.description }}</p>
+            <p><a ng-href="{{awesomeThing.url}}">{{ awesomeThing.url }}</a></p>
+          </div>
+        </div>
+      </div>
+		</div>
+		<div class="col-md-6">
+      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+
+                <ui-gmap-marker coords="map.marker.coords" idkey="map.marker.id" options="map.marker.options"></ui-gmap-marker>
+
+      </ui-gmap-google-map>
+		</div>
+	</div>
+  <air-footer></air-footer>
+</div>
