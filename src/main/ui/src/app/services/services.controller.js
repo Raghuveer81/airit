@@ -6,7 +6,7 @@
     .controller('ServicesController', ServicesController);
 
 
-  function ServicesController(webDevTec, uiGmapGoogleMapApi, $log) {
+  function ServicesController(webDevTec, uiGmapGoogleMapApi, $log, uiGmapIsReady) {
     var vm = this;
     vm.awesomeThings = webDevTec.getTec();
     vm.text = "Mallik"
@@ -18,6 +18,16 @@
       },
       zoom: 8
     };
+
+    uiGmapIsReady.promise(1).then(function(instances) {
+      $log.log('length of maps: ',instances.length);
+        instances.forEach(function(inst) {
+            var map = inst.map;
+            var uuid = map.uiGmap_id;
+            var mapInstanceNumber = inst.instance; // Starts at 1.
+              $log.log(uuid, mapInstanceNumber)
+        });
+    });
 
     uiGmapGoogleMapApi.then(function() {
       // $log.log(maps);
@@ -31,8 +41,8 @@
         marker: {
                   id:0,
                   coords: {
-                      latitude: 35.027469,
-                      longitude: -111.022753
+                      latitude: 45,
+                      longitude: -73
                   },
                   options: {
                       icon: {
